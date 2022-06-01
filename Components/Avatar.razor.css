@@ -1,0 +1,13 @@
+.avatar {
+    background-color: #777777;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.title {
+    font-size: 1rem;
+    color: #eee;
+    text-align: center;   
+    margin-top: 0.5rem;
+}

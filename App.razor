@@ -1,0 +1,29 @@
+﻿<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData">
+
+            <PageTitle>Chatty</PageTitle>
+
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+
+        </Found>
+        <NotFound>
+ 
+            <PageTitle>Not Found</PageTitle>
+ 
+            <LayoutView Layout="@typeof(MainLayout)">
+
+                <div class="d-flex justify-content-center">
+
+                    <div class="alert alert-danger w-25">
+                        Sorry There is nothing at this address
+                    </div>
+
+                </div>
+                
+            </LayoutView>
+
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

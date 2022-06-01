@@ -1,0 +1,46 @@
+@using System.Security.Claims
+
+<div class="container mt-4 shadow p-2 rouned">
+    <ChatHeader Name="@Name" Email="@Email" />
+</div>
+
+<div class="container overflow-auto mt-2 shadow p-3 mb-5 bg-white rounded" style="height: 500px;">
+    @if(!userMessages.Any())
+    {
+        <p>No Messages Yet Start Chatting!!</p>
+    }
+
+    @foreach(var message in userMessages)
+    {
+        @if(message.UserId == CurrentUser.FindFirstValue(ClaimTypes.NameIdentifier) ||
+            message.UserId == Id)
+        {
+            <div class="row mb-3 d-flex @(message.CurrentUser ? "justify-content-end" : "")">
+                <div class="card shadow @(message.CurrentUser ? "color-green text-white mr-5" : "ml-5")" style="width: 38rem;">
+                    <div class="card-header">
+                        @(message.CurrentUser ? "You" : message.UserName)
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item @(message.CurrentUser ? "color-green text-white" : "")">@message.Message</div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="small">@message.DateSent.ToString("HH:mm | MMM dd")</span>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-9">
+            <input @bind="messageInput" type="text" placeholder="Start Typing..." class="form-control" />
+        </div>
+        <div class="col-3">
+            <button @onclick="Send" class="btn btn-primary" disabled="@(!IsConnected)">SEND</button>            
+        </div>
+    </div>
+</div>
+
+

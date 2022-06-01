@@ -1,0 +1,71 @@
+
+@page "/register"
+
+<AuthorizeView Context="CurrentPrincipal">
+
+    <Authorized>
+
+        <div class="d-flex justify-content-center">
+
+            <div class="alert alert-danger w-25">
+                Your arleady logged in!
+            </div>
+
+        </div>
+
+    </Authorized>
+
+    <NotAuthorized>
+
+        <h1 class="text-center display-3 mt-4">Sign Up</h1>
+
+        <div class="d-flex justify-content-center mt-5">
+
+            <div class="card">
+                
+                <div class="card-body">
+
+                    <EditForm Model="request" OnValidSubmit="OnSubmit">
+                        
+                        <DataAnnotationsValidator />
+
+                        <div class="mb-3">
+                            <label class="form-label">First Name</label>
+                            <InputText class="form-control" @bind-Value="request.FirstName" />
+                            <ValidationMessage class="text-danger" For="@(() => request.FirstName)" />                
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Last Name</label>
+                            <InputText class="form-control" @bind-Value="request.LastName" />
+                            <ValidationMessage class="text-danger" For="@(() => request.LastName)" />                
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <InputText class="form-control" @bind-Value="request.Email" />
+                            <ValidationMessage class="text-danger" For="@(() => request.Email)" />                
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <InputText class="form-control" type="password" @bind-Value="request.Password" />
+                            <ValidationMessage class="text-danger" For="@(() => request.Password)" />
+                        </div>
+
+                        <div class="d-flex justify-content-start">
+
+                            <button type="submit" class="btn btn-primary">SUBMIT</button>
+
+                        </div>
+
+                    </EditForm>
+
+                </div>
+
+            </div>
+
+        </div>
+    </NotAuthorized>
+
+</AuthorizeView>

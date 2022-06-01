@@ -1,0 +1,38 @@
+@page "/chat/{id}"
+
+<div class="row">
+    
+    <div class="col-3">
+        <div class="shadow content d-flex flex-column p-3 mt-4">
+            <ChatMenu />
+        </div>
+    </div>
+
+    <div class="col-9">
+        @if(!string.IsNullOrEmpty(Id))
+        {
+            <ChatScreen Id="@Id" Name="@user.FullName" Email="@user.EmailAddress" />
+        }
+    </div>
+
+</div>
+
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+    private User user = new();
+
+    [Inject] public UserService userService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        user = await userService.GetUserAsync(Id);
+
+    }
+
+}
+
