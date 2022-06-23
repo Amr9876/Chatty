@@ -15,7 +15,6 @@ public partial class ChatScreen : ComponentBase, IAsyncDisposable
     private HubConnection hubConnection;
     private List<UserMessage> userMessages = new();
     private string messageInput;
-    private bool isUserReadOnly = false;
     public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
 
     [Inject] public NavigationManager NavManager { get; set; }
@@ -73,8 +72,6 @@ public partial class ChatScreen : ComponentBase, IAsyncDisposable
         {
 
             await hubConnection.SendAsync("SendPrivateMessage", CurrentUser.FindFirstValue(ClaimTypes.NameIdentifier), messageInput);
-
-            isUserReadOnly = true;
 
             messageInput = string.Empty;
 
